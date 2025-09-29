@@ -1,3 +1,6 @@
+import { state } from "../state"
+
+
 export function cScore() {
 
     class customScore extends HTMLElement {
@@ -13,6 +16,24 @@ export function cScore() {
             let title = document.createElement("c-text")
             let miPuntaje = document.createElement("c-text")
             let cpuPuntaje = document.createElement("c-text")
+            let resultado = this.getAttribute("type");
+
+            let score = JSON.parse(localStorage.getItem("score")!);
+            let jugador = score.miPuntaje;
+            let cpu = score.cpuPuntaje;
+            if (resultado == "true") {
+                jugador++
+            } else {
+                cpu++
+            }
+
+            let newScore = {
+                miPuntaje: jugador,
+                cpuPuntaje: cpu
+
+            }
+
+            state.setScore(newScore);
 
             style.innerHTML = `
             *{
@@ -48,8 +69,8 @@ export function cScore() {
             cpuPuntaje.setAttribute("margin", "0 10px 0 0")
 
             title.textContent = "Score"
-            miPuntaje.textContent = `Vos: X`
-            cpuPuntaje.textContent = `Maquina: X`
+            miPuntaje.textContent = `Vos: ${jugador}`
+            cpuPuntaje.textContent = `Maquina: ${cpu}`
 
             div.appendChild(title)
             div.appendChild(miPuntaje)

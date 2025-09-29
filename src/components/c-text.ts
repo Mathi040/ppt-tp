@@ -10,10 +10,14 @@ export function customText() {
 
         render() {
             let style = document.createElement("style")
-            let indicator = this.getAttribute("type");
-            let mrg = this.getAttribute("margin")
+            const indicator = this.getAttribute("type");
+            const mrg = this.getAttribute("margin")
+            const color = this.getAttribute("color")
             let txtContent = this.textContent;
             let element;
+            if (color) {
+                element!.style.color = color
+            }
             switch (indicator) {
                 case "h1":
                     element = document.createElement("h1");
@@ -21,7 +25,7 @@ export function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h1 {
-                            font-weight: 700;
+                            font-weight: 600;
                             font-size: 80px
                         }
                     `
@@ -32,7 +36,7 @@ export function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h2 {
-                            font-weight: 600;
+                            font-weight: 500;
                             font-size: 40px
                         }
                     `
@@ -43,7 +47,7 @@ export function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h3 {
-                            font-weight: 400;
+                            font-weight: 200;
                             font-size: 55px
                         }
                     `
@@ -54,7 +58,7 @@ export function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h4 {
-                            font-weight: 400;
+                            font-weight: 200;
                             font-size: 45px
                         }
                     `

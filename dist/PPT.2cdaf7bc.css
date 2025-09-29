@@ -5,6 +5,15 @@
 
 body {
   background-image: url("fondo.28ff55f5.png");
+  height: 100vh;
   margin: 0;
+  position: relative;
+}
+
+.main {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
 }
 /*# sourceMappingURL=PPT.2cdaf7bc.css.map */

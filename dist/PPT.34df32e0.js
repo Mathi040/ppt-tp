@@ -672,15 +672,21 @@ var _cImg = require("./components/c-img");
 var _cButton = require("./components/c-button");
 var _cResultado = require("./components/c-resultado");
 var _cScore = require("./components/c-score");
+var _router = require("./router");
+var _state = require("./state");
 (function() {
     (0, _cText.customText)();
     (0, _cImg.cImg)();
     (0, _cButton.cButton)();
     (0, _cResultado.cResultado)();
     (0, _cScore.cScore)();
+    const score = localStorage.getItem("score");
+    if (!score) localStorage.setItem("score", JSON.stringify((0, _state.state).getState().score));
+    const main = document.querySelector(".main");
+    (0, _router.router)(main);
 })();
 
-},{"./components/c-text":"kO96k","./components/c-img":"8j5Dr","./components/c-button":"6ZEA5","./components/c-resultado":"aVYhi","./components/c-score":"975b3"}],"kO96k":[function(require,module,exports,__globalThis) {
+},{"./components/c-text":"kO96k","./components/c-img":"8j5Dr","./components/c-button":"6ZEA5","./components/c-resultado":"aVYhi","./components/c-score":"975b3","./router":"4wVP1","./state":"dWXvP"}],"kO96k":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "customText", ()=>customText);
@@ -694,10 +700,12 @@ function customText() {
         }
         render() {
             let style = document.createElement("style");
-            let indicator = this.getAttribute("type");
-            let mrg = this.getAttribute("margin");
+            const indicator = this.getAttribute("type");
+            const mrg = this.getAttribute("margin");
+            const color = this.getAttribute("color");
             let txtContent = this.textContent;
             let element;
+            if (color) element.style.color = color;
             switch(indicator){
                 case "h1":
                     element = document.createElement("h1");
@@ -705,7 +713,7 @@ function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h1 {
-                            font-weight: 700;
+                            font-weight: 600;
                             font-size: 80px
                         }
                     `;
@@ -716,7 +724,7 @@ function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h2 {
-                            font-weight: 600;
+                            font-weight: 500;
                             font-size: 40px
                         }
                     `;
@@ -727,7 +735,7 @@ function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h3 {
-                            font-weight: 400;
+                            font-weight: 200;
                             font-size: 55px
                         }
                     `;
@@ -738,7 +746,7 @@ function customText() {
                     element.style.margin = `${mrg}`;
                     style.innerHTML = `
                         h4 {
-                            font-weight: 400;
+                            font-weight: 200;
                             font-size: 45px
                         }
                     `;
@@ -794,6 +802,8 @@ parcelHelpers.export(exports, "cImg", ()=>cImg);
 const piedra = new URL(require("dfb5ca3de81d3ae9")).toString();
 const papel = new URL(require("3d310ab124b974e2")).toString();
 const tijera = new URL(require("75383c8c23733980")).toString();
+const ganaste = new URL(require("96023ac29ac0df1d")).toString();
+const perdiste = new URL(require("8c2463edc8a0288d")).toString();
 function cImg() {
     class cTests extends HTMLElement {
         constructor(){
@@ -804,17 +814,17 @@ function cImg() {
             switch(indicator){
                 case "piedra":
                     this.innerHTML = `
-                    <img src="${piedra}"></img >
+                    <img src="${piedra}" style="width: 100%" ></img >
                     `;
                     break;
                 case "papel":
                     this.innerHTML = `
-                    <img src="${papel}"></img >
+                    <img src="${papel}" style="width: 100%" ></img >
                     `;
                     break;
                 case "tijera":
                     this.innerHTML = `
-                    <img src="${tijera}"></img >
+                    <img src="${tijera}" style="width: 100%" ></img >
                     `;
                     break;
                 default:
@@ -825,7 +835,7 @@ function cImg() {
     customElements.define("c-img", cTests);
 }
 
-},{"dfb5ca3de81d3ae9":"e9RNu","3d310ab124b974e2":"azuci","75383c8c23733980":"2ue5S","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"e9RNu":[function(require,module,exports,__globalThis) {
+},{"dfb5ca3de81d3ae9":"e9RNu","3d310ab124b974e2":"azuci","75383c8c23733980":"2ue5S","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK","96023ac29ac0df1d":"76ME1","8c2463edc8a0288d":"1Y7c6"}],"e9RNu":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("piedra.7901f798.svg") + "?" + Date.now();
 
 },{}],"azuci":[function(require,module,exports,__globalThis) {
@@ -833,6 +843,12 @@ module.exports = module.bundle.resolve("papel.28ae9bf4.svg") + "?" + Date.now();
 
 },{}],"2ue5S":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("tijera.81646f64.svg") + "?" + Date.now();
+
+},{}],"76ME1":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("ganaste.ce5a94bb.svg") + "?" + Date.now();
+
+},{}],"1Y7c6":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("perdiste.fa4594a9.svg") + "?" + Date.now();
 
 },{}],"6ZEA5":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -868,6 +884,17 @@ function cButton() {
 
             c-button {
             margin: 500px}
+
+            button:hover {
+                background-color: #3c50b9ff;
+                color: #b4fcfcff;
+                border-color: #445bcaff;
+            }
+
+            button:active {
+            background-color: #022cfaff;
+            border-color: #1f3bc7ff;
+            }
             `;
             button.textContent = this.textContent;
             this.shadow.appendChild(button);
@@ -931,16 +958,11 @@ function cResultado() {
     customElements.define("c-resultado", customResultado);
 }
 
-},{"cf248b945c075840":"76ME1","b100439db059c5c0":"1Y7c6","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"76ME1":[function(require,module,exports,__globalThis) {
-module.exports = module.bundle.resolve("ganaste.ce5a94bb.svg") + "?" + Date.now();
-
-},{}],"1Y7c6":[function(require,module,exports,__globalThis) {
-module.exports = module.bundle.resolve("perdiste.fa4594a9.svg") + "?" + Date.now();
-
-},{}],"975b3":[function(require,module,exports,__globalThis) {
+},{"cf248b945c075840":"76ME1","b100439db059c5c0":"1Y7c6","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"975b3":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "cScore", ()=>cScore);
+var _state = require("../state");
 function cScore() {
     class customScore extends HTMLElement {
         constructor(){
@@ -955,6 +977,17 @@ function cScore() {
             let title = document.createElement("c-text");
             let miPuntaje = document.createElement("c-text");
             let cpuPuntaje = document.createElement("c-text");
+            let resultado = this.getAttribute("type");
+            let score = JSON.parse(localStorage.getItem("score"));
+            let jugador = score.miPuntaje;
+            let cpu = score.cpuPuntaje;
+            if (resultado == "true") jugador++;
+            else cpu++;
+            let newScore = {
+                miPuntaje: jugador,
+                cpuPuntaje: cpu
+            };
+            (0, _state.state).setScore(newScore);
             style.innerHTML = `
             *{
                 box-sizing: border-box;
@@ -987,8 +1020,8 @@ function cScore() {
             miPuntaje.setAttribute("margin", "0 10px 0 0");
             cpuPuntaje.setAttribute("margin", "0 10px 0 0");
             title.textContent = "Score";
-            miPuntaje.textContent = `Vos: X`;
-            cpuPuntaje.textContent = `Maquina: X`;
+            miPuntaje.textContent = `Vos: ${jugador}`;
+            cpuPuntaje.textContent = `Maquina: ${cpu}`;
             div.appendChild(title);
             div.appendChild(miPuntaje);
             div.appendChild(cpuPuntaje);
@@ -999,6 +1032,377 @@ function cScore() {
     customElements.define("c-score", customScore);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}]},["fVkvW","gH3Lb"], "gH3Lb", "parcelRequire7796", {}, "./", "/")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK","../state":"dWXvP"}],"dWXvP":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state);
+const state = {
+    data: {
+        currentGame: {
+            miEleccion: "",
+            cpuEleccion: ""
+        },
+        score: {
+            miPuntaje: 0,
+            cpuPuntaje: 0
+        }
+    },
+    getState: ()=>{
+        return state.data;
+    },
+    setScore (newScore) {
+        state.data.score = newScore;
+        localStorage.setItem("score", JSON.stringify(newScore));
+    },
+    setCurrent (newCurrent) {
+        state.data.currentGame = newCurrent;
+    },
+    listeners: [],
+    subscribe (callback) {
+        state.listeners.push(callback);
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"4wVP1":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "router", ()=>router);
+var _welcomePage = require("./pages/welcomePage");
+var _startPage = require("./pages/startPage");
+var _gamePage = require("./pages/gamePage");
+var _resultado = require("./pages/resultado");
+const routes = [
+    {
+        route: /\/welcome$/,
+        handler: (0, _welcomePage.welcomePage)
+    },
+    {
+        route: /\/start$/,
+        handler: (0, _startPage.startPage)
+    },
+    {
+        route: /\/game$/,
+        handler: (0, _gamePage.gamePage)
+    },
+    {
+        route: /\/resultado$/,
+        handler: (0, _resultado.resultado)
+    }
+];
+function router(container) {
+    const foundRoute = routes.some((r)=>r.route.test(location.pathname));
+    if (!foundRoute) {
+        goTo("/welcome");
+        console.log(123);
+    } else goTo(location.pathname);
+    window.onpopstate = ()=>{
+        handleRouter(location.pathname);
+    };
+    function handleRouter(path) {
+        for (const route of routes){
+            if (route.route.test(path)) {
+                const div = route.handler(goTo);
+                if (container.firstElementChild) container.innerHTML = "";
+                container.appendChild(div);
+            }
+            if (route.route.test("/game") && path == "/game") (0, _gamePage.juego)(goTo);
+        }
+    }
+    function goTo(path) {
+        history.pushState({}, "", path);
+        handleRouter(path);
+    }
+}
+
+},{"./pages/welcomePage":"htcGj","./pages/startPage":"RKI0c","./pages/gamePage":"4NJWF","./pages/resultado":"bCFHN","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"htcGj":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "welcomePage", ()=>welcomePage);
+function welcomePage(params) {
+    let div = document.createElement("div");
+    div.innerHTML = `
+        <style>
+            c-text {
+            color: #009048;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .icons {
+            width: fit-content;
+            display: flex;
+            gap: 60px;
+            position: relative;
+            top: 80px;
+        }
+        </style>
+
+
+        <div class="content">
+        <div class="title">
+          <c-text type="h1" margin="0">Piedra</c-text>
+          <c-text type="h1" margin="0">Papel</c-text>
+          <c-text type="h1" margin="0">Tijera</c-text>
+        </div>
+        <c-button id="button">Empezar</c-button>
+        <div class="icons">
+          <c-img type="piedra"></c-img>
+          <c-img type="papel"></c-img>
+          <c-img type="tijera"></c-img>
+        </div>
+      </div>
+    `;
+    setTimeout(()=>{
+        const button = document.getElementById("button");
+        button?.addEventListener("click", ()=>{
+            params("/start");
+        });
+    }, 0);
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"RKI0c":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "startPage", ()=>startPage);
+function startPage(params) {
+    let div = document.createElement("div");
+    div.innerHTML = `
+    <style>
+            .content {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 50px;
+            }
+
+            .rules {
+              width: 317px;
+            }
+
+            .icons {
+              width: fit-content;
+              display: flex;
+              gap: 60px;
+              position: relative;
+              top: 95px;
+            }
+    </style>
+
+        <div class="content">
+        <div class="rules">
+          <c-text type="h2"
+            >Presion\xe1 jugar y eleg\xed: piedra, papel o tijera antes de que pasen
+            los 3 segundos.</c-text
+          >
+        </div>
+        <c-button id="button">Jugar!</c-button>
+        <div class="icons">
+          <c-img type="piedra"></c-img>
+          <c-img type="papel"></c-img>
+          <c-img type="tijera"></c-img>
+        </div>
+      </div>
+    `;
+    setTimeout(()=>{
+        const button = document.getElementById("button");
+        button?.addEventListener("click", ()=>{
+            params("/game");
+        });
+    }, 0);
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"4NJWF":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "gamePage", ()=>gamePage);
+parcelHelpers.export(exports, "juego", ()=>juego);
+var _state = require("../state");
+function gamePage() {
+    let div = document.createElement("div");
+    div.classList.add("content");
+    div.innerHTML = `
+        <style>
+            .content {
+              position: relative;
+            }
+            
+            .timer {
+              text-align: center;
+              font-size: 150px;
+            }
+            .img {
+              width: 100vw;
+              display: flex;
+              justify-content: space-around;
+              position: relative;
+              top: 220px;
+            }
+            
+            c-img {
+              width: 100px;
+            }
+        
+        </style>
+
+
+        <div class="timer">Eleg\xed!</div>
+        <div class="img">
+          <c-img type="piedra" class="elegir"></c-img>
+          <c-img type="papel" class="elegir"></c-img>
+          <c-img type="tijera" class="elegir"></c-img>
+        </div>
+    `;
+    return div;
+}
+async function juego(params) {
+    let timerEl = document.querySelector(".timer");
+    let content = document.querySelector(".content");
+    while(true)if (timerEl) {
+        const jugador = await eleccionJugador(timerEl);
+        const maquina = eleccionCPU();
+        (0, _state.state).setCurrent({
+            miEleccion: jugador,
+            cpuEleccion: maquina
+        });
+        if (jugador === maquina) {
+            timerEl.innerHTML = "Empate!";
+            await new Promise((r)=>setTimeout(r, 1500));
+            continue;
+        }
+        break;
+    }
+    content.innerHTML = `
+  <style>
+  .content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+
+.eleccion {
+  width: 150px;
+  }
+.cpu > :first-child {
+    transform: scaleY(-1);
+    position: relative;
+    top: -20px;
+  }
+
+.jugador > :first-child {
+    position: relative;
+    top: -40px;
+  }
+  </style>
+
+            <c-img type="${(0, _state.state).getState().currentGame.cpuEleccion}" class="eleccion cpu" ></c-img>
+            <c-img type="${(0, _state.state).getState().currentGame.miEleccion}" class="eleccion jugador"></c-img>
+
+  `;
+    setTimeout(()=>{
+        params("/resultado");
+    }, 2000);
+}
+function eleccionCPU() {
+    const manos = [
+        "piedra",
+        "papel",
+        "tijera"
+    ];
+    const index = Math.floor(Math.random() * 3);
+    let eleccion = manos[index];
+    return eleccion;
+}
+function eleccionJugador(timerEl) {
+    return new Promise((resolve)=>{
+        let eleccion = null;
+        let time = 3;
+        timerEl.innerHTML = "Elegi!";
+        const timer = setInterval(()=>{
+            timerEl.innerHTML = time.toString();
+            time--;
+            if (time < 0) {
+                clearInterval(timer);
+                if (!eleccion) resolve(null);
+                else resolve(eleccion);
+            }
+        }, 1000);
+        const imgs = document.querySelectorAll(".elegir");
+        imgs.forEach((img)=>{
+            img.addEventListener("click", ()=>{
+                eleccion = img.getAttribute("type");
+            });
+        }, {
+            once: true
+        });
+    });
+}
+
+},{"../state":"dWXvP","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}],"bCFHN":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resultado", ()=>resultado);
+var _state = require("../state");
+function resultado(params) {
+    let div = document.createElement("div");
+    div.classList.add("content");
+    const gane = decisionFinal();
+    let boton;
+    let color;
+    console.log(gane);
+    if (gane) {
+        boton = "ganaste";
+        color = "rgba(0, 255, 0, 0.3)";
+    } else {
+        boton = "perdiste";
+        color = "rgba(255, 0, 0, 0.3)";
+    }
+    div.innerHTML = `
+        <style>
+            .content {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                position: absolute;
+            }
+
+            .main {
+            background-color: ${color}}
+        </style>
+
+        <c-resultado type="${boton}"></c-resultado>
+        <c-score type="${gane}"></c-score>
+        <c-button id="button">Volver a jugar</c-button>
+    `;
+    setTimeout(()=>{
+        const button = document.getElementById("button");
+        button?.addEventListener("click", ()=>{
+            params("/game");
+        });
+    }, 0);
+    return div;
+}
+function decisionFinal() {
+    const jugador = (0, _state.state).getState().currentGame.miEleccion;
+    const cpu = (0, _state.state).getState().currentGame.cpuEleccion;
+    const tijera = jugador == "tijera" && cpu == "papel";
+    const papel = jugador == "papel" && cpu == "piedra";
+    const piedra = jugador == "piedra" && cpu == "tijera";
+    return [
+        tijera,
+        papel,
+        piedra
+    ].includes(true);
+}
+
+},{"../state":"dWXvP","@parcel/transformer-js/src/esmodule-helpers.js":"lP4VK"}]},["fVkvW","gH3Lb"], "gH3Lb", "parcelRequire7796", {}, "./", "/")
 
 //# sourceMappingURL=PPT.34df32e0.js.map

@@ -6,4 +6,21 @@
 body {
   margin: 0;
   background-image: url("./assets/fondo.png");
+  height: 100vh;
+  position: relative;
 }
+
+.main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  position: absolute;
+} */

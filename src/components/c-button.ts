@@ -29,6 +29,17 @@ export function cButton() {
 
             c-button {
             margin: 500px}
+
+            button:hover {
+                background-color: #3c50b9ff;
+                color: #b4fcfcff;
+                border-color: #445bcaff;
+            }
+
+            button:active {
+            background-color: #022cfaff;
+            border-color: #1f3bc7ff;
+            }
             `
             button.textContent = this.textContent
 
