@@ -210,7 +210,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
                     transform: translate(-50%, -50%);
                     color: white;
                 }
-                `,e.appendChild(t),e.appendChild(n),this.shadow.appendChild(i),this.shadow.appendChild(e)}}customElements.define("c-resultado",l);class m extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){let e=document.createElement("style"),t=document.createElement("div"),n=document.createElement("c-text"),i=document.createElement("c-text"),c=document.createElement("c-text"),o=this.getAttribute("type"),r=JSON.parse(localStorage.getItem("score")),s=r.miPuntaje,l=r.cpuPuntaje;"true"==o?s++:l++;let d={miPuntaje:s,cpuPuntaje:l};a.setScore(d),e.innerHTML=`
+                `,e.appendChild(t),e.appendChild(n),this.shadow.appendChild(i),this.shadow.appendChild(e)}}customElements.define("c-resultado",l);class p extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){let e=document.createElement("style"),t=document.createElement("div"),n=document.createElement("c-text"),i=document.createElement("c-text"),c=document.createElement("c-text"),o=this.getAttribute("type"),r=JSON.parse(localStorage.getItem("score")),s=r.miPuntaje,l=r.cpuPuntaje;"true"==o?s++:l++;let d={miPuntaje:s,cpuPuntaje:l};a.setScore(d),e.innerHTML=`
             *{
                 box-sizing: border-box;
             }
@@ -234,5 +234,5 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
                 text-align: right;
                 margin: 0 50px 0 0;
             }
-            `,n.setAttribute("type","h3"),i.setAttribute("type","h4"),c.setAttribute("type","h4"),n.setAttribute("margin","0"),i.setAttribute("margin","0 10px 0 0"),c.setAttribute("margin","0 10px 0 0"),n.textContent="Score",i.textContent=`Vos: ${s}`,c.textContent=`Maquina: ${l}`,t.appendChild(n),t.appendChild(i),t.appendChild(c),this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-score",m),localStorage.getItem("score")||localStorage.setItem("score",JSON.stringify(a.getState().score)),document.querySelector(".main"),d(window.location.pathname)}();
-//# sourceMappingURL=ppt-tp.a8b0fd94.js.map
+            `,n.setAttribute("type","h3"),i.setAttribute("type","h4"),c.setAttribute("type","h4"),n.setAttribute("margin","0"),i.setAttribute("margin","0 10px 0 0"),c.setAttribute("margin","0 10px 0 0"),n.textContent="Score",i.textContent=`Vos: ${s}`,c.textContent=`Maquina: ${l}`,t.appendChild(n),t.appendChild(i),t.appendChild(c),this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-score",p),localStorage.getItem("score")||localStorage.setItem("score",JSON.stringify(a.getState().score)),document.querySelector(".main"),d(function(){let e=window.location.pathname,t="/ppt-tp";if(e.startsWith(t))return e.replace(t,"")||"/"}())}();
+//# sourceMappingURL=ppt-tp.a2dfa9af.js.map
