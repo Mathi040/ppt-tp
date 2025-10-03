@@ -15,6 +15,7 @@ export function gamePage() {
               text-align: center;
               font-size: 150px;
             }
+              
             .img {
               width: 100vw;
               display: flex;
@@ -24,9 +25,16 @@ export function gamePage() {
             }
             
             c-img {
-              width: 100px;
+ j             width: 100px;
             }
-        
+
+            @media (min-width: 1000px) {
+            body {
+            overflow: hidden;
+            }
+            c-img {
+              width: 160px;
+            }
         </style>
 
 
@@ -85,6 +93,13 @@ export async function juego(params: Function) {
     position: relative;
     top: -40px;
   }
+
+
+
+  @media (min-width: 1000px) {
+            .jugador > :first-child {
+              top: 00px
+            }
   </style>
 
             <c-img type="${state.getState().currentGame.cpuEleccion}" class="eleccion cpu" ></c-img>

@@ -1,6 +1,6 @@
 export function startPage(params: Function) {
   let div = document.createElement("div")
-
+  div.classList.add("content")
   div.innerHTML = `
     <style>
             .content {
@@ -8,22 +8,30 @@ export function startPage(params: Function) {
               flex-direction: column;
               align-items: center;
               gap: 50px;
+              padding-bottom: 100px;
             }
 
             .rules {
               width: 317px;
             }
 
-            .icons {
-              width: fit-content;
-              display: flex;
-              gap: 60px;
-              position: relative;
-              top: 95px;
+        .icons {
+            width: fit-content;
+            display: flex;
+            gap: 60px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        
+          @media (min-width: 1000px) {
+            c-img {
+              width: 80px;
             }
+        }
     </style>
 
-        <div class="content">
+        
         <div class="rules">
           <c-text type="h2"
             >Presioná jugar y elegí: piedra, papel o tijera antes de que pasen
@@ -36,7 +44,7 @@ export function startPage(params: Function) {
           <c-img type="papel"></c-img>
           <c-img type="tijera"></c-img>
         </div>
-      </div>
+      
     `
 
   setTimeout(() => {

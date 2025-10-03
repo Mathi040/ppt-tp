@@ -1,7 +1,7 @@
 export function welcomePage(params: any) {
-    let div = document.createElement("div")
-
-    div.innerHTML = `
+  let div = document.createElement("div")
+  div.classList.add("content")
+  div.innerHTML = `
         <style>
             c-text {
             color: #009048;
@@ -12,19 +12,30 @@ export function welcomePage(params: any) {
             flex-direction: column;
             align-items: center;
             gap: 50px;
+            padding-bottom: 100px
         }
 
         .icons {
             width: fit-content;
             display: flex;
             gap: 60px;
-            position: relative;
-            top: 80px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        
+          @media (min-width: 1000px) {
+            c-img {
+            width: 80px;
+            }
+
+            .content {
+              padding-bottom: 150px
+            }
         }
         </style>
 
 
-        <div class="content">
         <div class="title">
           <c-text type="h1" margin="0">Piedra</c-text>
           <c-text type="h1" margin="0">Papel</c-text>
@@ -36,16 +47,15 @@ export function welcomePage(params: any) {
           <c-img type="papel"></c-img>
           <c-img type="tijera"></c-img>
         </div>
-      </div>
     `
 
-    setTimeout(() => {
-        const button = document.getElementById("button")
-        button?.addEventListener("click", () => {
-            params("/start")
-        })
-    }, 0)
+  setTimeout(() => {
+    const button = document.getElementById("button")
+    button?.addEventListener("click", () => {
+      params("/start")
+    })
+  }, 0)
 
 
-    return div
+  return div
 }
