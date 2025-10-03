@@ -1,38 +1,4 @@
-const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.resolve("jCRxP")).toString(),n=new URL(import.meta.resolve("2GUiF")).toString();var i={};new URL(i=import.meta.resolve("iR1nw")).toString();var c={};new URL(c=import.meta.resolve("armOJ")).toString();const o=new URL(i).toString(),r=new URL(c).toString(),a={data:{currentGame:{miEleccion:"",cpuEleccion:""},score:{miPuntaje:0,cpuPuntaje:0}},getState:()=>a.data,setScore(e){a.data.score=e,localStorage.setItem("score",JSON.stringify(e))},setCurrent(e){a.data.currentGame=e},listeners:[],subscribe(e){a.listeners.push(e)}};async function s(e){let t=document.querySelector(".timer"),n=document.querySelector(".content");for(;;)if(t){let e=await function(e){return new Promise(t=>{let n=null,i=3;e.innerHTML="Elegi!";let c=setInterval(()=>{e.innerHTML=i.toString(),--i<0&&(clearInterval(c),n?t(n):t(null))},1e3);document.querySelectorAll(".elegir").forEach(e=>{e.addEventListener("click",()=>{n=e.getAttribute("type")})},{once:!0})})}(t),n=["piedra","papel","tijera"][Math.floor(3*Math.random())];if(a.setCurrent({miEleccion:e,cpuEleccion:n}),e===n){t.innerHTML="Empate!",await new Promise(e=>setTimeout(e,1500));continue}break}n.innerHTML=`
-  <style>
-  .content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  }
-
-.eleccion {
-  width: 150px;
-  }
-.cpu > :first-child {
-    transform: scaleY(-1);
-    position: relative;
-    top: -20px;
-  }
-
-.jugador > :first-child {
-    position: relative;
-    top: -40px;
-  }
-
-
-
-  @media (min-width: 1000px) {
-            .jugador > :first-child {
-              top: 00px
-            }
-  </style>
-
-            <c-img type="${a.getState().currentGame.cpuEleccion}" class="eleccion cpu" ></c-img>
-            <c-img type="${a.getState().currentGame.miEleccion}" class="eleccion jugador"></c-img>
-
-  `,setTimeout(()=>{e("/resultado")},2e3)}const l=[{route:/\/welcome$/,handler:function(e){let t=document.createElement("div");return t.classList.add("content"),t.innerHTML=`
+const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.resolve("jCRxP")).toString(),n=new URL(import.meta.resolve("2GUiF")).toString();var i={};new URL(i=import.meta.resolve("iR1nw")).toString();var c={};new URL(c=import.meta.resolve("armOJ")).toString();const o=new URL(i).toString(),r=new URL(c).toString(),a={data:{currentGame:{miEleccion:"",cpuEleccion:""},score:{miPuntaje:0,cpuPuntaje:0}},getState:()=>a.data,setScore(e){a.data.score=e,localStorage.setItem("score",JSON.stringify(e))},setCurrent(e){a.data.currentGame=e},listeners:[],subscribe(e){a.listeners.push(e)}},s=[{regExp:/\/welcome$/,handler:function(e){let t=document.createElement("div");return t.classList.add("content"),t.innerHTML=`
         <style>
             c-text {
             color: #009048;
@@ -78,7 +44,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
           <c-img type="papel"></c-img>
           <c-img type="tijera"></c-img>
         </div>
-    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/start")})},0),t}},{route:/\/start$/,handler:function(e){let t=document.createElement("div");return t.classList.add("content"),t.innerHTML=`
+    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/start")})},0),t}},{regExp:/\/start$/,handler:function(e){let t=document.createElement("div");return t.classList.add("content"),t.innerHTML=`
     <style>
             .content {
               display: flex;
@@ -122,7 +88,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
           <c-img type="tijera"></c-img>
         </div>
       
-    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/game")})},0),t}},{route:/\/game$/,handler:function(){let e=document.createElement("div");return e.classList.add("content"),e.innerHTML=`
+    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/game")})},0),t}},{regExp:/\/game$/,handler:function(){let e=document.createElement("div");return e.classList.add("content"),e.innerHTML=`
         <style>
             .content {
               position: relative;
@@ -161,7 +127,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
           <c-img type="papel" class="elegir"></c-img>
           <c-img type="tijera" class="elegir"></c-img>
         </div>
-    `,e}},{route:/\/resultado$/,handler:function(e){let t,n,i=document.createElement("div");i.classList.add("content");let c=function(){let e=a.getState().currentGame.miEleccion,t=a.getState().currentGame.cpuEleccion;return["tijera"==e&&"papel"==t,"papel"==e&&"piedra"==t,"piedra"==e&&"tijera"==t].includes(!0)}();return console.log(c),c?(t="ganaste",n="rgba(0, 255, 0, 0.3)"):(t="perdiste",n="rgba(255, 0, 0, 0.3)"),i.innerHTML=`
+    `,e}},{regExp:/\/resultado$/,handler:function(e){let t,n,i=document.createElement("div");i.classList.add("content");let c=function(){let e=a.getState().currentGame.miEleccion,t=a.getState().currentGame.cpuEleccion;return["tijera"==e&&"papel"==t,"papel"==e&&"piedra"==t,"piedra"==e&&"tijera"==t].includes(!0)}();return console.log(c),c?(t="ganaste",n="rgba(0, 255, 0, 0.3)"):(t="perdiste",n="rgba(255, 0, 0, 0.3)"),i.innerHTML=`
         <style>
             .content {
                 display: flex;
@@ -178,7 +144,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
         <c-resultado type="${t}"></c-resultado>
         <c-score type="${c}"></c-score>
         <c-button id="button">Volver a jugar</c-button>
-    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/game")})},0),i}}];!function(){class i extends HTMLElement{constructor(){super()}connectedCallback(){this.render()}render(){let e,t=document.createElement("style"),n=this.getAttribute("type"),i=this.getAttribute("margin"),c=this.getAttribute("color"),o=this.textContent;switch(c&&(e.style.color=c),n){case"h1":(e=document.createElement("h1")).textContent=o,e.style.margin=`${i}`,t.innerHTML=`
+    `,setTimeout(()=>{let t=document.getElementById("button");t?.addEventListener("click",()=>{e("/game")})},0),i}}];function l(e){window.history.pushState({},"",e),d(e)}function d(e){let t=s.find(t=>t.regExp.test(e));if(t){let e=document.getElementById("main");e&&(e.innerHTML="",e.appendChild(t.handler(l)))}else console.warn(`${e} no  fue encontrado`)}!function(){class i extends HTMLElement{constructor(){super()}connectedCallback(){this.render()}render(){let e,t=document.createElement("style"),n=this.getAttribute("type"),i=this.getAttribute("margin"),c=this.getAttribute("color"),o=this.textContent;switch(c&&(e.style.color=c),n){case"h1":(e=document.createElement("h1")).textContent=o,e.style.margin=`${i}`,t.innerHTML=`
                         h1 {
                             font-weight: 600;
                             font-size: 80px
@@ -204,7 +170,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
                     <img src="${t}" style="width: 100%" ></img >
                     `;break;case"tijera":this.innerHTML=`
                     <img src="${n}" style="width: 100%" ></img >
-                    `}}}customElements.define("c-img",c);class d extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){let e=document.createElement("button"),t=document.createElement("style");t.innerHTML=`
+                    `}}}customElements.define("c-img",c);class s extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){let e=document.createElement("button"),t=document.createElement("style");t.innerHTML=`
             button {
                 min-width: 322px;
                 height: 87px;
@@ -231,7 +197,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
             background-color: #022cfaff;
             border-color: #1f3bc7ff;
             }
-            `,e.textContent=this.textContent,this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-button",d);class m extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){let e=document.createElement("div"),t=document.createElement("img"),n=document.createElement("c-text"),i=document.createElement("style"),c=this.getAttribute("type");"ganaste"==c?(t.src=o,n.textContent="Ganaste"):"perdiste"==c?(t.src=r,n.textContent="Perdiste"):t.src="err",n.setAttribute("type","h3"),i.innerHTML=`
+            `,e.textContent=this.textContent,this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-button",s);class l extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){let e=document.createElement("div"),t=document.createElement("img"),n=document.createElement("c-text"),i=document.createElement("style"),c=this.getAttribute("type");"ganaste"==c?(t.src=o,n.textContent="Ganaste"):"perdiste"==c?(t.src=r,n.textContent="Perdiste"):t.src="err",n.setAttribute("type","h3"),i.innerHTML=`
                 div {
                     position: relative;
                     width: fit-content;
@@ -244,7 +210,7 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
                     transform: translate(-50%, -50%);
                     color: white;
                 }
-                `,e.appendChild(t),e.appendChild(n),this.shadow.appendChild(i),this.shadow.appendChild(e)}}customElements.define("c-resultado",m);class p extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){let e=document.createElement("style"),t=document.createElement("div"),n=document.createElement("c-text"),i=document.createElement("c-text"),c=document.createElement("c-text"),o=this.getAttribute("type"),r=JSON.parse(localStorage.getItem("score")),s=r.miPuntaje,l=r.cpuPuntaje;"true"==o?s++:l++;let d={miPuntaje:s,cpuPuntaje:l};a.setScore(d),e.innerHTML=`
+                `,e.appendChild(t),e.appendChild(n),this.shadow.appendChild(i),this.shadow.appendChild(e)}}customElements.define("c-resultado",l);class m extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}connectedCallback(){let e=document.createElement("style"),t=document.createElement("div"),n=document.createElement("c-text"),i=document.createElement("c-text"),c=document.createElement("c-text"),o=this.getAttribute("type"),r=JSON.parse(localStorage.getItem("score")),s=r.miPuntaje,l=r.cpuPuntaje;"true"==o?s++:l++;let d={miPuntaje:s,cpuPuntaje:l};a.setScore(d),e.innerHTML=`
             *{
                 box-sizing: border-box;
             }
@@ -268,5 +234,5 @@ const e=new URL(import.meta.resolve("av9qO")).toString(),t=new URL(import.meta.r
                 text-align: right;
                 margin: 0 50px 0 0;
             }
-            `,n.setAttribute("type","h3"),i.setAttribute("type","h4"),c.setAttribute("type","h4"),n.setAttribute("margin","0"),i.setAttribute("margin","0 10px 0 0"),c.setAttribute("margin","0 10px 0 0"),n.textContent="Score",i.textContent=`Vos: ${s}`,c.textContent=`Maquina: ${l}`,t.appendChild(n),t.appendChild(i),t.appendChild(c),this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-score",p),localStorage.getItem("score")||localStorage.setItem("score",JSON.stringify(a.getState().score));var u=document.querySelector(".main");!function e(t){history.pushState({},"",t);for(let n of l){if(n.route.test(t)){let t=n.handler(e);u.firstElementChild&&(u.innerHTML=""),u.appendChild(t)}n.route.test("/game")&&"/game"==t&&s(e)}}("/welcome")}();
-//# sourceMappingURL=ppt-tp.a852bbf4.js.map
+            `,n.setAttribute("type","h3"),i.setAttribute("type","h4"),c.setAttribute("type","h4"),n.setAttribute("margin","0"),i.setAttribute("margin","0 10px 0 0"),c.setAttribute("margin","0 10px 0 0"),n.textContent="Score",i.textContent=`Vos: ${s}`,c.textContent=`Maquina: ${l}`,t.appendChild(n),t.appendChild(i),t.appendChild(c),this.shadow.appendChild(e),this.shadow.appendChild(t)}}customElements.define("c-score",m),localStorage.getItem("score")||localStorage.setItem("score",JSON.stringify(a.getState().score)),document.querySelector(".main"),d(window.location.pathname)}();
+//# sourceMappingURL=ppt-tp.a8b0fd94.js.map
